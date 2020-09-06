@@ -55,15 +55,15 @@
         <!--xu-->
       </el-table-column>
 
-      <el-table-column min-width="150" label="appId">
+      <el-table-column min-width="150" label="clientId">
         <template slot-scope="scope">
-          <span class="link-type" @click="handleUpdate(scope.row)">{{ scope.row.appId }}</span>
+          <span class="link-type" @click="handleUpdate(scope.row)">{{ scope.row.clientId }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column min-width="180" label="appSecret">
+      <el-table-column min-width="180" label="clientSecret">
         <template slot-scope="scope">
-          <span>{{ scope.row.appSecret }}</span>
+          <span>{{ scope.row.clientSecret }}</span>
         </template>
       </el-table-column>
 
@@ -130,30 +130,111 @@
       :title="textMap[dialogStatus]"
       :close-on-click-modal="false"
       :visible.sync="dialogFormVisible"
+      width="70%"
     >
       <el-form
         :inline="true"
         :model="client"
         class="small-space client-form"
         label-position="left"
-        label-width="70px"
+        label-width="30%"
       >
         <el-row>
           <el-col :span="12">
-            <el-form-item class="client-form-item" label="appId">
+            <el-form-item class="client-form-item" label="clientId">
               <el-input
-                v-model="client.appId"
+                v-model="client.clientId"
                 class="filter-item"
-                placeholder="请输入appId"
+                placeholder="请输入clientId(不可重复)"
               />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item class="client-form-item" label="appSecret">
+            <el-form-item class="client-form-item" label="clientSecret">
               <el-input
-                v-model="client.appSecret"
+                v-model="client.clientSecret"
                 class="filter-item"
                 placeholder="请输入appSecret"
+              />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="12">
+            <el-form-item class="client-form-item" label="访问范围">
+              <el-input
+                v-model="client.scope"
+                class="filter-item"
+                placeholder=""
+              />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item class="client-form-item" label="授权类型">
+              <el-input
+                v-model="client.authorizedGrantTypes"
+                class="filter-item"
+                placeholder="请输入"
+              />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="12">
+            <el-form-item class="client-form-item" label="资源ID">
+              <el-input
+                v-model="client.resourceIds"
+                class="filter-item"
+                placeholder=""
+              />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item class="client-form-item" label="重定向地址">
+              <el-input
+                v-model="client.webServerRedirectUri"
+                class="filter-item"
+                placeholder="请输入"
+              />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="12">
+            <el-form-item class="client-form-item" label="访问token有效期">
+              <el-input
+                v-model="client.accessTokenValidity"
+                class="filter-item"
+                placeholder=""
+              />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item class="client-form-item" label="刷新token有效期">
+              <el-input
+                v-model="client.refreshTokenValidity"
+                class="filter-item"
+                placeholder="请输入"
+              />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="12">
+            <el-form-item class="client-form-item" label="权限">
+              <el-input
+                v-model="client.authorities"
+                class="filter-item"
+                placeholder=""
+              />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item class="client-form-item" label="附加信息">
+              <el-input
+                v-model="client.additionalInformation"
+                class="filter-item"
+                placeholder="请输入"
               />
             </el-form-item>
           </el-col>
@@ -167,6 +248,17 @@
                 class="filter-item"
                 placeholder="请输入描述"
               />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item class="client-form-item" label="autoapprove">
+              <el-select
+                v-model="client.autoapprove"
+                class="filter-item"
+              >
+                <el-option key="true" label="TRUE" value="true" />
+                <el-option key="false" label="FALSE" value="false" />
+              </el-select>
             </el-form-item>
           </el-col>
         </el-row>
@@ -352,9 +444,18 @@ export default {
       transferTitle: ['未选API', '已选API'],
       client: {
         clientAppId: undefined,
-        appId: '',
-        appSecret: '',
-        description: ''
+        clientId: '',
+        clientSecret: '',
+        description: '',
+        scope: '',
+        authorizedGrantTypes: '',
+        resourceIds: '',
+        webServerRedirectUri: '',
+        accessTokenValidity: 0,
+        refreshTokenValidity: 0,
+        authorities: '',
+        additionalInformation: '',
+        autoapprove: ''
       },
       clientList: null,
       ipList: null,
@@ -508,18 +609,34 @@ export default {
     },
     handleCreate() {
       this.client.clientAppId = ''
-      this.client.appId = ''
-      this.client.appSecret = ''
+      this.client.clientId = ''
+      this.client.clientSecret = ''
       this.client.description = ''
-
+      this.scope = ''
+      this.authorizedGrantTypes = ''
+      this.resourceIds = ''
+      this.webServerRedirectUri = ''
+      this.accessTokenValidity = 0
+      this.refreshTokenValidity = 0
+      this.authorities = ''
+      this.additionalInformation = ''
+      this.autoapprove = ''
       this.dialogStatus = 'create'
       this.dialogFormVisible = true
     },
     handleUpdate(row) {
       this.client.clientAppId = row.clientAppId
-      this.client.appId = row.appId
-      this.client.appSecret = row.appSecret
+      this.client.clientId = row.clientId
+      this.client.clientSecret = row.clientSecret
       this.client.description = row.description
+      this.authorizedGrantTypes = row.authorizedGrantTypes
+      this.resourceIds = row.resourceIds
+      this.webServerRedirectUri = row.webServerRedirectUri
+      this.accessTokenValidity = row.accessTokenValidity
+      this.refreshTokenValidity = row.refreshTokenValidity
+      this.authorities = row.authorities
+      this.additionalInformation = row.additionalInformation
+      this.autoapprove = row.autoapprove
 
       this.dialogStatus = 'update'
       this.dialogFormVisible = true
@@ -723,12 +840,12 @@ export default {
 
   .client-form {
     width: 92%;
-    margin-left: 8%;
+    margin-left: 5%;
   }
 
   .client-form .client-form-item {
     width: 100%;
-    margin-right: 20px;
+    margin-right: 10px;
   }
 
   /*.role-tree .el-tree {*/

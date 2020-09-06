@@ -159,7 +159,7 @@
                   </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                  <el-form-item class="api-form-item" label="请求URL">
+                  <el-form-item class="api-form-item" label="请求URI">
                     <el-input
                       v-model="api.uri"
                       class="filter-item"

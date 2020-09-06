@@ -53,7 +53,8 @@ function revise(menuList) {
     } else {
       menuList[menu].alwaysShow = false
     }
-    if (menuList[menu].hidden === '1') {
+    // 有隐藏属性或类型为按钮、非菜单页面的设置为隐藏
+    if (menuList[menu].hidden === '1' || menuList[menu].type === 2 || menuList[menu].type === 3) {
       menuList[menu].hidden = true
     } else {
       menuList[menu].hidden = false

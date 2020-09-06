@@ -1,13 +1,13 @@
 import request from '@/utils/request'
 
 const realApiUrl = {
-  roleList: '/role/list',
-  roleAll: '/role/all',
-  roleAdd: '/role',
-  roleUpdate: '/role',
-  roleDelete: '/role',
-  roleAuth: '/role/auth',
-  roleMenu: '/role/menu'
+  roleList: '/upms/role/list',
+  roleAll: '/upms/role/all',
+  roleAdd: '/upms/role',
+  roleUpdate: '/upms/role',
+  roleDelete: '/upms/role',
+  roleAuth: '/upms/role/auth',
+  roleMenu: '/upms/role/menu'
 }
 
 const url = realApiUrl

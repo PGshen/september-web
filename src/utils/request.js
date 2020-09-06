@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { MessageBox, Message } from 'element-ui'
+import { MessageBox, Message, Notification } from 'element-ui'
 import store from '@/store'
 import router from '@/router'
 import { getToken } from '@/utils/auth'
@@ -14,7 +14,7 @@ axios.defaults.headers[CONTENT_TYPE] = 'application/json'
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
   withCredentials: true, // send cookies when cross-domain requests
-  timeout: 5000 // request timeout
+  timeout: 10000 // request timeout
 })
 
 // request interceptor
@@ -25,7 +25,8 @@ service.interceptors.request.use(
     if (store.getters.token) {
       // let each request carry token --['X-Token'] as a custom key.
       // please modify it according to the actual situation.
-      config.headers[X_AUTH_TOKEN] = getToken()
+      // config.headers[X_AUTH_TOKEN] = getToken()
+      config.headers['Authorization'] = 'Bearer ' + getToken()
     }
     return config
   },
@@ -41,7 +42,7 @@ service.interceptors.response.use(
   /**
    * If you want to get information such as headers or status
    * Please return  response => response
-  */
+   */
 
   /**
    * Determine the request status by custom code
@@ -50,13 +51,23 @@ service.interceptors.response.use(
    */
   response => {
     const res = response.data
+    // 若是 文件下载，不判断code，因为没有
+    if (res.type === 'multipart/form-data') {
+      return response
+    }
 
     // if the custom code is not 20000, it is judged as an error.
-    if (!is200(res.code)) {
-      Message({
-        message: res.message || 'error',
-        type: 'error',
-        duration: 5 * 1000
+    if (res.code !== undefined && !is200(res.code)) {
+      // Message({
+      //   message: res.message || 'error',
+      //   type: 'error',
+      //   duration: 5 * 1000
+      // })
+      Notification({
+        title: '请求异常',
+        message: res.message || '请求异常',
+        type: 'warning',
+        duration: 3 * 1000
       })
 
       // token 无效

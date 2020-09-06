@@ -109,14 +109,14 @@
           >编辑
           </el-button>
           <el-button
-            v-if="typeof(permList) !== 'undefined' && permList.indexOf('sys:user:ban') !== -1 && scope.row.isEnable === 0"
+            v-if="typeof(permList) !== 'undefined' && permList.indexOf('sys:user:ban') !== -1 && scope.row.isEnable === 1"
             size="mini"
             type="warning"
             @click="enableUser(scope.row)"
           >禁用
           </el-button>
           <el-button
-            v-if="typeof(permList) !== 'undefined' && permList.indexOf('sys:user:ban') !== -1 && scope.row.isEnable === 1"
+            v-if="typeof(permList) !== 'undefined' && permList.indexOf('sys:user:ban') !== -1 && scope.row.isEnable === 0"
             size="mini"
             type="success"
             @click="enableUser(scope.row)"
@@ -173,7 +173,7 @@
                 v-model="user.loginName"
                 name="loginName"
                 class="filter-item"
-                placeholder="请输入手机号"
+                placeholder="请输入登录名"
               />
             </el-form-item>
           </el-col>

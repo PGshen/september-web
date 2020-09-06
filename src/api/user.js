@@ -10,7 +10,7 @@ import request from '@/utils/request'
 
 export function getInfo(token) {
   return request({
-    url: '/user/info',
+    url: '/upms/user/info',
     method: 'get',
     params: { token }
   })
@@ -18,7 +18,7 @@ export function getInfo(token) {
 
 export function logout() {
   return request({
-    url: '/user/logout',
+    url: '/upms/user/logout',
     method: 'post'
   })
 }

@@ -1,10 +1,11 @@
 /* eslint-disable semi */
 import request from '@/utils/request'
+import { encryption } from '@/utils/tools'
 
 const realApiUrl = {
-  login: '/login',
-  logout: '/logout',
-  userInfo: '/user/now'
+  login: '/auth/oauth/token',
+  logout: '/upms/logout',
+  userInfo: '/upms/user/now'
 };
 
 const url = realApiUrl;
@@ -15,17 +16,33 @@ export function loginByEmail(email, password) {
     password
   };
   return request({
-    url: '/login/loginbyemail',
+    url: '/upms/login/loginbyemail',
     method: 'post',
     data
   });
 }
 
-export function login(data) {
+export function login({ username, password }) {
+  const userInfo = { username, password };
+  const user = encryption({
+    data: userInfo,
+    key: '1234567887654321',
+    param: ['password']
+  });
+
+  const params = {
+    username: user.username,
+    password: user.password,
+    grant_type: 'password',
+    scope: 'server',
+    client_id: 'app',
+    client_secret: 'app'
+  }
+
   return request({
     url: url.login,
     method: 'post',
-    data
+    params
   });
 }
 
