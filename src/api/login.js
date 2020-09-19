@@ -4,8 +4,8 @@ import { encryption } from '@/utils/tools'
 
 const realApiUrl = {
   login: '/auth/oauth/token',
-  logout: '/upms/logout',
-  userInfo: '/upms/user/now'
+  logout: '/admin/logout',
+  userInfo: '/admin/user/now'
 };
 
 const url = realApiUrl;
@@ -16,7 +16,7 @@ export function loginByEmail(email, password) {
     password
   };
   return request({
-    url: '/upms/login/loginbyemail',
+    url: '/admin/login/loginbyemail',
     method: 'post',
     data
   });

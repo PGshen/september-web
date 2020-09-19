@@ -1,10 +1,10 @@
 import request from '@/utils/request'
 
 const realApiUrl = {
-  apiTree: '/upms/api/tree',
-  apiAdd: '/upms/api',
-  apiUpdate: '/upms/api',
-  apiDelete: '/upms/api'
+  apiTree: '/admin/api/tree',
+  apiAdd: '/admin/api',
+  apiUpdate: '/admin/api',
+  apiDelete: '/admin/api'
 }
 
 const url = realApiUrl

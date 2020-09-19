@@ -1,12 +1,12 @@
 import request from '@/utils/request'
 
 const realClientUrl = {
-  clientList: '/upms/client/list',
-  clientAdd: '/upms/client',
-  clientUpdate: '/upms/client',
-  clientDelete: '/upms/client',
-  clientApi: '/upms/client/api',
-  clientIp: '/upms/client/ip'
+  clientList: '/admin/client/list',
+  clientAdd: '/admin/client',
+  clientUpdate: '/admin/client',
+  clientDelete: '/admin/client',
+  clientApi: '/admin/client/api',
+  clientIp: '/admin/client/ip'
 }
 
 const url = realClientUrl

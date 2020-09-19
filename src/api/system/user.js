@@ -1,12 +1,12 @@
 import request from '@/utils/request'
 
 const realApiUrl = {
-  userList: '/upms/user/list',
-  userAdd: '/upms/user',
-  userUpdate: '/upms/user',
-  userDelete: '/upms/user',
-  userRole: '/upms/user/role',
-  userEnable: '/upms/user/ban'
+  userList: '/admin/user/list',
+  userAdd: '/admin/user',
+  userUpdate: '/admin/user',
+  userDelete: '/admin/user',
+  userRole: '/admin/user/role',
+  userEnable: '/admin/user/ban'
 }
 
 const url = realApiUrl

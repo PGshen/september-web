@@ -1,13 +1,13 @@
 import request from '@/utils/request'
 
 const realApiUrl = {
-  routerTree: '/upms/menu/route',
-  menuTree: '/upms/menu/tree',
-  menuAdd: '/upms/menu',
-  menuUpdate: '/upms/menu',
-  menuDelete: '/upms/menu',
-  permList: '/upms/menu/perm',
-  menuApi: '/upms/menu/api'
+  routerTree: '/admin/menu/route',
+  menuTree: '/admin/menu/tree',
+  menuAdd: '/admin/menu',
+  menuUpdate: '/admin/menu',
+  menuDelete: '/admin/menu',
+  permList: '/admin/menu/perm',
+  menuApi: '/admin/menu/api'
 }
 
 const url = realApiUrl

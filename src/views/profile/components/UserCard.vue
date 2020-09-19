@@ -22,7 +22,7 @@
         <div class="user-bio-section-header"><svg-icon icon-class="education" /><span>Education</span></div>
         <div class="user-bio-section-body">
           <div class="text-muted">
-            JS in Computer Science from the University of Technology
+            Network Engineering from GDUT
           </div>
         </div>
       </div>
@@ -31,20 +31,20 @@
         <div class="user-bio-section-header"><svg-icon icon-class="skill" /><span>Skills</span></div>
         <div class="user-bio-section-body">
           <div class="progress-item">
-            <span>Vue</span>
+            <span>Java</span>
             <el-progress :percentage="70" />
           </div>
           <div class="progress-item">
-            <span>JavaScript</span>
-            <el-progress :percentage="18" />
+            <span>Vue</span>
+            <el-progress :percentage="50" />
           </div>
           <div class="progress-item">
-            <span>Css</span>
-            <el-progress :percentage="12" />
+            <span>Go</span>
+            <el-progress :percentage="45" />
           </div>
           <div class="progress-item">
-            <span>ESLint</span>
-            <el-progress :percentage="100" status="success" />
+            <span>Python</span>
+            <el-progress :percentage="30" />
           </div>
         </div>
       </div>
